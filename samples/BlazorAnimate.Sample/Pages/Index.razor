@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(1)">
+
+    <h1>Hello, world!</h1>
+
+    Welcome to your new app.
+
+    <Animator Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(1)">
+        <Counter></Counter>
+    </Animator>
+
+</Animate>
+
+@code{
+    [Inject] private IJSRuntime _jsRuntime { get; set; }
+
+    public async Task Remove()
+    {
+        await _jsRuntime.InvokeVoidAsync("animator.remove");
+    }
+}

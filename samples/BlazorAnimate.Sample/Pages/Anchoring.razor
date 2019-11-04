@@ -1,0 +1,36 @@
+﻿@page "/anchoring"
+
+<h1>Anchoring example</h1>
+
+Please scroll down to see how anchoring works. With anchors it is possible to use an another HTML element as a trigger for the animation.
+
+<Animate Animation="Animations.FadeRight" Anchor="#trigger-left" AnchorPlacement="@Anchor.TopTop" class="left-pane" DurationMs="1200" Easing="Easings.EaseInOutBack" Once="true" Mirror="true">
+    <Item>
+        LEFT
+    </Item>
+</Animate>
+
+<Animate Animation="Animations.FadeLeft" Anchor="#trigger-right" AnchorPlacement="@Anchor.TopCenter" class="right-pane" DurationMs="1200" Easing="Easings.EaseInOutBack" Once="false" Mirror="true">
+    <Item>
+        RIGHT
+    </Item>
+</Animate>
+
+<Item>1</Item>
+<Item id="trigger-left">
+    2
+    <span>Triggers left pane when scrolled to the top. Pane isn't automatically hidden when scrolling back.</span>
+</Item>
+<Item>3</Item>
+<Item>4</Item>
+<Item>5</Item>
+<Item>6</Item>
+<Item id="trigger-right">
+    7
+    <span>Triggers right pane when scrolled to the center of window. Pane is automatically hidden when scrolled back.</span>
+</Item>
+<Item>8</Item>
+<Item>9</Item>
+<Item>10</Item>
+<Item>11</Item>
+<Item>12</Item>

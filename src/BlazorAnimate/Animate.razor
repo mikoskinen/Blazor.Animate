@@ -1,0 +1,122 @@
+﻿@using System.Globalization
+@using Microsoft.Extensions.Options
+
+<div @attributes="@InputAttributes" data-aos="@_animationName" data-aos-delay="@_delay" data-aos-duration="@_duration" data-aos-easing="@_easingName"
+     data-aos-mirror="@_mirror" data-aos-once="@_once" data-aos-offset="@Offset" data-aos-anchor="@Anchor" data-aos-anchor-placement="@AnchorPlacement">
+    @ChildContent
+</div>
+
+@code
+{
+    private string _animationName = "";
+    private string _easingName = "";
+    private string _duration = "";
+    private string _delay = "";
+    private string _mirror;
+    private string _once;
+
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public IAnimation Animation { get; set; }
+    [Parameter] public IEasing Easing { get; set; }
+    [Parameter] public TimeSpan? Duration { get; set; }
+    [Parameter] public TimeSpan? Delay { get; set; }
+    [Parameter] public int? DurationMs { get; set; }
+    [Parameter] public int? DelayMs { get; set; }
+    [Parameter] public bool? Mirror { get; set; }
+    [Parameter] public bool? Once { get; set; }
+    [Parameter] public int Offset { get; set; }
+    [Parameter] public string Anchor { get; set; }
+    [Parameter] public string AnchorPlacement { get; set; }
+    [Parameter] public string OptionsName { get; set; } = Microsoft.Extensions.Options.Options.DefaultName;
+    [Parameter] public AnimateOptions Options { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAttributes { get; set; }
+
+    [Inject] private IOptionsSnapshot<AnimateOptions> _optionsAccessor { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        SetDefaults();
+
+        if (!string.IsNullOrWhiteSpace(Animation?.Name))
+        {
+            _animationName = Animation.Name;
+        }
+
+        if (!string.IsNullOrWhiteSpace(Easing?.Name))
+        {
+            _easingName = Easing.Name;
+        }
+
+        SetDuration();
+        SetDelay();
+
+        if (Mirror != null)
+        {
+            _mirror = Mirror.GetValueOrDefault().ToString().ToLowerInvariant();
+        }
+
+        if (Once != null)
+        {
+            _once = Once.GetValueOrDefault().ToString().ToLowerInvariant();
+        }
+    }
+
+    private void SetDefaults()
+    {
+        var options = GetOptions();
+        if (options == null)
+        {
+            return;
+        }
+
+        _animationName = options.Animation?.Name ?? "";
+        _easingName = options.Easing?.Name ?? "";
+        _duration = options.Duration.TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
+        _delay = options.Delay.TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
+        _mirror = options.Mirror.ToString().ToLowerInvariant();
+        _once = options.Once.ToString().ToLowerInvariant();
+    }
+
+    private AnimateOptions GetOptions()
+    {
+        var result = Options;
+        if (result != null)
+        {
+            return result;
+        }
+
+        result = _optionsAccessor.Get(OptionsName);
+
+        return result;
+    }
+
+    private void SetDuration()
+    {
+        if (Duration != null)
+        {
+            _duration = Duration.GetValueOrDefault().TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
+            return;
+        }
+
+        if (DurationMs != null)
+        {
+            _duration = DurationMs.GetValueOrDefault().ToString();
+        }
+    }
+
+    private void SetDelay()
+    {
+        if (Delay != null)
+        {
+            _delay = Delay.GetValueOrDefault().TotalMilliseconds.ToString(CultureInfo.InvariantCulture);
+            return;
+        }
+
+        if (DelayMs != null)
+        {
+            _delay = DelayMs.GetValueOrDefault().ToString();
+        }
+    }
+}

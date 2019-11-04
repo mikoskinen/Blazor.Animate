@@ -1,0 +1,129 @@
+﻿@page "/testbed"
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Animation</label>
+        <select class="form-control" name="animation" @bind="@AnimationName">
+            @foreach (var animationType in AnimationTypes)
+            {
+                <option value="@animationType">@animationType</option>
+            }
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        <label>Easing</label>
+        <select class="form-control" name="animation" @bind="@EasingName">
+            <option value=""></option>
+            @foreach (var easingType in EasingTypes)
+            {
+                <option value="@easingType">@easingType</option>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label>Delay</label>
+        <input type="number" class="form-control" placeholder="Delay" @bind-value="@Delay" />
+    </div>
+    <div class="form-group col-md-6">
+        <label>Duration</label>
+        <input type="number" class="form-control" placeholder="Duration" @bind-value="@Duration" />
+    </div>
+</div>
+
+<div class="mb-3"></div>
+<button class="btn btn-primary" @onclick="RenderComponent">Animate</button>
+<div class="mb-3"></div>
+
+@CustomRender
+
+@code {
+    private RenderFragment CustomRender { get; set; }
+    private int Delay { get; set; } = 0;
+    private int Duration { get; set; } = 1000;
+    private string AnimationName { get; set; }
+    private List<string> AnimationTypes { get; set; } = new List<string>();
+    private string EasingName { get; set; }
+    private List<string> EasingTypes { get; set; } = new List<string>();
+
+    private static int count = 1;
+
+    protected override void OnInitialized()
+    {
+        CreateAnimationOptions();
+        CreateEasingOptions();
+    }
+
+    private RenderFragment CreateComponent() => builder =>
+    {
+        builder.OpenComponent<Animate>(count * 1);
+        builder.AddAttribute(count * 2, "DelayMs", Delay);
+        builder.AddAttribute(count * 3, "DurationMs", Duration);
+        builder.AddAttribute(count * 4, "Animation", GetAnimationByName(AnimationName));
+        var easing = GetEasingByName(EasingName);
+        if (easing != null)
+        {
+            builder.AddAttribute(count * 5, "Easing", easing);
+        }
+
+        builder.AddAttribute(count * 10, "ChildContent", (MulticastDelegate)CreateChildComponent());
+        builder.CloseComponent();
+
+        count += 1;
+    };
+
+    private void RenderComponent()
+    {
+        CustomRender = CreateComponent();
+    }
+
+    private void CreateAnimationOptions()
+    {
+        var properties = typeof(Animations).GetProperties();
+        foreach (var prop in properties)
+        {
+            AnimationTypes.Add(prop.Name);
+        }
+
+        AnimationName = AnimationTypes.First();
+    }
+
+    private void CreateEasingOptions()
+    {
+        var properties = typeof(Easings).GetProperties();
+        foreach (var prop in properties)
+        {
+            EasingTypes.Add(prop.Name);
+        }
+    }
+
+    private IAnimation GetAnimationByName(string name)
+    {
+        var animationProp = typeof(Animations).GetProperty(name);
+        var result = (IAnimation)animationProp.GetValue(null, null);
+
+        return result;
+    }
+
+    private IEasing GetEasingByName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return null;
+        }
+
+        var easingProp = typeof(Easings).GetProperty(name);
+        var result = (IEasing)easingProp.GetValue(null, null);
+
+        return result;
+    }
+
+    private RenderFragment CreateChildComponent() => builder =>
+    {
+        builder.OpenComponent<Counter>(count * 50);
+
+        builder.CloseComponent();
+    };
+}

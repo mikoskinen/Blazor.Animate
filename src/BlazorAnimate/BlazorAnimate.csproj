@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Mikael Koskinen</Authors>
+    <Description>Easily Enimate Blazor Components using Blazor Animate. Powered by AOS.</Description>
+    <PackageDescription>Easily Enimate Blazor Components using Blazor Animate. Powered by AOS.</PackageDescription>
+    <PackageProjectUrl>https://github.com/mikoskinen/BlazorAnimate</PackageProjectUrl>
+    <Copyright>©2019 Weik.io</Copyright>
+    <PackageId>BlazorAnimate</PackageId>
+    <Product>BlazorAnimate</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/mikoskinen/Blazor.Animate</RepositoryUrl>
+    <PackageTags>blazor;animation;animate</PackageTags>
+    <Title>Blazor AnimateApi Framework for ASP.NET Core</Title>
+    <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>    
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
+    <PackageReference Include="MinVer" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>

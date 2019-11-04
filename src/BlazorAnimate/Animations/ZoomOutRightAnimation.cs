@@ -1,0 +1,7 @@
+﻿namespace BlazorAnimate
+{
+    public class ZoomOutRightAnimation : IAnimation
+    {
+        public string Name => "zoom-out-right";
+    }
+}
