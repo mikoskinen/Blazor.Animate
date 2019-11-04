@@ -2,6 +2,7 @@
 
 Easily add fade, slide and zoom-effects into your Blazor applications. Blazor.Animate is powered by the excellent [AOS-library](https://michalsnik.github.io/aos/).
 
+![Blazor.Animate animation](blazoranimate.gif)
 Blazor.Animate is an animation component for Blazor. With Blazor.Animate you can animate how other components are brought to the view. You can easily add fade, slide and zoom-effects and even add easing to the animations.
 
 [![NuGet](https://img.shields.io/nuget/v/BlazorAnimate.svg)](https://www.nuget.org/packages/BlazorAnimate/)
