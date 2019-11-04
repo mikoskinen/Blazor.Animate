@@ -1,4 +1,4 @@
-﻿namespace BlazorAnimate
+namespace BlazorAnimate
 {
     public static class Easings
     {
@@ -20,7 +20,7 @@
         public static IEasing EaseOutCubic => new EaseOutCubicEasing();
         public static IEasing EaseInOutCubic => new EaseInOutCubicEasing();
         public static IEasing EaseInQuart => new EaseInQuartEasing();
-        public static IEasing EaseOutQuartEasing => new EaseOutQuartEasing();
-        public static IEasing EaseInOutQuartEasing => new EaseInOutQuartEasing();
+        public static IEasing EaseOutQuart => new EaseOutQuartEasing();
+        public static IEasing EaseInOutQuart => new EaseInOutQuartEasing();
     }
 }

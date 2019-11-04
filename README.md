@@ -1,20 +1,173 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Blazor.Animate 
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Easily add fade, slide and zoom-effects into your Blazor applications. Blazor.Animate is powered by the excellent [AOS-library](https://michalsnik.github.io/aos/).
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+Blazor.Animate is an animation component for Blazor. With Blazor.Animate you can animate how other components are brought to the view. You can easily add fade, slide and zoom-effects and even add easing to the animations.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+[![NuGet](https://img.shields.io/nuget/v/BlazorAnimate.svg)](https://www.nuget.org/packages/BlazorAnimate/)
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+## Quick Start
+
+To animate a component, wrap it inside Animate-component and use the Animation-parameter to define the animation:
+
+```
+    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" >
+        <Counter></Counter>
+    </Animate>
+```
+
+## Getting Started
+
+Few steps are required in order to use the library.
+
+#### Add NuGet
+
+```csharp
+Install-Package BlazorAnimate
+```
+
+#### Configure _Imports.razor
+
+```
+...
+@using BlazorAnimate
+```
+
+#### Add JS interop into _Host.cshtml
+
+```
+    <script src="_content/BlazorAnimate/blazorAnimateInterop.js"></script>
+```
+
+#### Use the Animate-component
+
+```
+    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(1)">
+        <Counter></Counter>
+    </Animate>
+```
+
+## Sample
+
+For a sample, please view http://animateblazorsamplessvc.azurewebsites.net/
+
+The sample's source code is available from GitHub: https://github.com/mikoskinen/Blazor.Animate/tree/master/samples/BlazorAnimate.Sample
+
+## Animations
+
+To define an animation, use the Animation-property of the Animate-component. The built-in animations are available from BlazorAnimate.Animations:
+
+* Fade
+* FadeIn
+* FadeUp
+* FadeDown
+* FadeLeft
+* FadeRight
+* FadeUpRight
+* FadeUpLeft
+* FadeDownRight
+* FadeDownLeft
+* FlipUp
+* FlipDown
+* FlipLeft
+* FlipRight
+* SlideUp
+* SlideDown
+* SlideLeft
+* SlideRight
+* ZoomIn
+* ZoomInUp
+* ZoomInDown
+* ZoomInLeft
+* ZoomInRight
+* ZoomOut
+* ZoomOutUp
+* ZoomOutDown
+* ZoomOutLeft
+* ZoomOutRight
+
+Use Duration (TimeSpan) or DurationMs -property to define the duration of an animation.
+
+Use Delay (TimeSpan) or DelayMs -property to define how long the animation is delayed before it is started.
+
+## Available easings
+
+To define an easing for the animation, use the Easing-property of the Animate-component. The built-in easings are available from BlazorAnimate.Easings:
+
+* Linear
+* Ease
+* EaseIn
+* EaseOut
+* EaseInOut
+* EaseInBack
+* EaseOutBack
+* EaseInOutBack
+* EaseInSine
+* EaseOutSine
+* EaseInOutSine
+* EaseInQuad
+* EaseOutQuad
+* EaseInOutQuad
+* EaseInCubic
+* EaseOutCubic 
+* EaseInOutCubic
+* EaseInQuart
+* EaseOutQuart
+* EaseInOutQuart
+
+## Configuring the defaults
+
+ASP.NET Core's options can be used to define the default animation settings:
+
+```
+            services.Configure<AnimateOptions>(options =>
+            {
+                options.Animation = Animations.FadeDown;
+                options.Duration = TimeSpan.FromMilliseconds(100);
+            });
+```
+
+If no animation parameters is defined on the Animate-component, the defaults are used:
+
+```
+<Animate>
+    <h1>Hello, world!</h1>
+</Animate>
+```
+
+## Named configurations
+
+Blazor.Animate supports named animation settings through the ASP.NET Core's named options. Here's an example where two configurations are provided, one without a name (the defaults) and one with a name:
+
+```
+            services.Configure<AnimateOptions>("my", options =>
+            {
+                options.Animation = Animations.FadeDown;
+                options.Duration = TimeSpan.FromSeconds(2);
+            });
+
+            services.Configure<AnimateOptions>(options =>
+            {
+                options.Animation = Animations.FadeDown;
+                options.Duration = TimeSpan.FromMilliseconds(100);
+            });
+```
+
+To use a named configuration, provide the OptionsName-parameter:
+
+```
+<Animate OptionsName="my">
+    <h1>Hello, world!</h1>
+</Animate>
+```
+## Authors
+
+Blazor.Animate is created by [Mikael Koskinen](https://mikaelkoskinen.net).
+
+Contributions are welcome!
+
+## License
+
+Blazor.Animate is MIT licensed. The library uses the following other libraries:
+
+* [AOS](https://michalsnik.github.io/aos/): MIT-license
