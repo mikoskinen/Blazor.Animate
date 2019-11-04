@@ -6,17 +6,8 @@
 
     Welcome to your new app.
 
-    <Animator Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(1)">
+    <Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" Delay="TimeSpan.FromSeconds(1)">
         <Counter></Counter>
-    </Animator>
+    </Animate>
 
 </Animate>
-
-@code{
-    [Inject] private IJSRuntime _jsRuntime { get; set; }
-
-    public async Task Remove()
-    {
-        await _jsRuntime.InvokeVoidAsync("animator.remove");
-    }
-}
