@@ -8,8 +8,8 @@
     <Authors>Mikael Koskinen</Authors>
     <Description>Easily Enimate Blazor Components using Blazor Animate. Powered by AOS.</Description>
     <PackageDescription>Easily Enimate Blazor Components using Blazor Animate. Powered by AOS.</PackageDescription>
-    <PackageProjectUrl>https://github.com/mikoskinen/BlazorAnimate</PackageProjectUrl>
-    <Copyright>©2019 Weik.io</Copyright>
+    <PackageProjectUrl>https://github.com/mikoskinen/Blazor.Animate</PackageProjectUrl>
+    <Copyright>©2019 Mikael Koskinen</Copyright>
     <PackageId>BlazorAnimate</PackageId>
     <Product>BlazorAnimate</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
