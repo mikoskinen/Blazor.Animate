@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,8 +6,8 @@
     <IsPackable>true</IsPackable>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mikael Koskinen</Authors>
-    <Description>Easily Enimate Blazor Components using Blazor Animate. Powered by AOS.</Description>
-    <PackageDescription>Easily Enimate Blazor Components using Blazor Animate. Powered by AOS.</PackageDescription>
+    <Description>Easily Animate Blazor Components using Blazor Animate. Powered by AOS.</Description>
+    <PackageDescription>Easily Animate Blazor Components using Blazor Animate. Powered by AOS.</PackageDescription>
     <PackageProjectUrl>https://github.com/mikoskinen/Blazor.Animate</PackageProjectUrl>
     <Copyright>©2019 Mikael Koskinen</Copyright>
     <PackageId>BlazorAnimate</PackageId>
@@ -15,15 +15,35 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/mikoskinen/Blazor.Animate</RepositoryUrl>
     <PackageTags>blazor;animation;animate</PackageTags>
-    <Title>Blazor AnimateApi Framework for ASP.NET Core</Title>
-    <MinVerMinimumMajorMinor>1.0</MinVerMinimumMajorMinor>    
+    <Title>Blazor Animate</Title>
+    <MinVerMinimumMajorMinor>2.0</MinVerMinimumMajorMinor>    
   </PropertyGroup>
 
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.0" />
     <PackageReference Include="MinVer" Version="2.0.0" />
   </ItemGroup>
 
+  <Target Name="CopyMissingBlazorContent" BeforeTargets="BlazorCompleteStandalonePublish">
+    <!-- https://github.com/aspnet/AspNetCore/issues/13103#issuecomment-555172130 -->
+    <PropertyGroup>
+      <FullPublishDir>$(PublishDir)</FullPublishDir>
+      <FullPublishDir Condition=" $(FullPublishDir.Contains(':')) != 'true' ">$(MSBuildThisFileDirectory)$(PublishDir)</FullPublishDir>
+    </PropertyGroup>
+
+    <Message Text="PublishIntermediateOutputPath: $(PublishIntermediateOutputPath)" Importance="high" />
+    <Message Text="OutDir: $(OutDir)" Importance="high" />
+    <Message Text="BlazorPublishDistDir: $(BlazorPublishDistDir)" Importance="High" />
+    <Message Text="PublishDir: $(PublishDir)" Importance="High" />
+    <Message Text="FullPublishDir: $(FullPublishDir)" Importance="High" />
+
+    <CreateItem Include="$(FullPublishDir)wwwroot\**\*.*">
+      <Output TaskParameter="Include" ItemName="FilesToCopy" />
+    </CreateItem>
+    <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(FullPublishDir)$(BlazorPublishDistDir)%(RecursiveDir)" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Retries="3" RetryDelayMilliseconds="300" />
+    <RemoveDir Directories="$(FullPublishDir)wwwroot" />
+    <Delete Files="$(FullPublishDir)$(BlazorPublishDistDir)**\*.map" />
+  </Target>
+  
 </Project>

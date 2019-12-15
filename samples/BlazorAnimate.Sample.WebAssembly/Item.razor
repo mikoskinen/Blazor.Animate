@@ -1,0 +1,15 @@
+﻿<div class="item @ExtraClass" @attributes="InputAttributes" >
+    @ChildContent
+</div>
+
+@code {
+
+    [Parameter] 
+    public string ExtraClass { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)] 
+    public Dictionary<string, object> InputAttributes { get; set; }
+
+    [Parameter] 
+    public RenderFragment ChildContent { get; set; }
+}

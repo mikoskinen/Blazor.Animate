@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAnimate", "BlazorAnimate\BlazorAnimate.csproj", "{641CF984-9682-415D-A788-66D49E790E90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAnimate", "BlazorAnimate\BlazorAnimate.csproj", "{641CF984-9682-415D-A788-66D49E790E90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAnimate.Sample", "..\samples\BlazorAnimate.Sample\BlazorAnimate.Sample.csproj", "{7EE72187-9A1F-47A0-9599-1FEA3342E3FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorAnimate.Sample", "..\samples\BlazorAnimate.Sample\BlazorAnimate.Sample.csproj", "{7EE72187-9A1F-47A0-9599-1FEA3342E3FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorAnimate.Sample.WebAssembly", "..\samples\BlazorAnimate.Sample.WebAssembly\BlazorAnimate.Sample.WebAssembly.csproj", "{A86A6546-D842-495A-8487-8F298E836546}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7EE72187-9A1F-47A0-9599-1FEA3342E3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EE72187-9A1F-47A0-9599-1FEA3342E3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EE72187-9A1F-47A0-9599-1FEA3342E3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86A6546-D842-495A-8487-8F298E836546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86A6546-D842-495A-8487-8F298E836546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86A6546-D842-495A-8487-8F298E836546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86A6546-D842-495A-8487-8F298E836546}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
