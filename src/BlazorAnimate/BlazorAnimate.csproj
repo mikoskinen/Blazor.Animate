@@ -9,14 +9,14 @@
     <Description>Easily Animate Blazor Components using Blazor Animate. Powered by AOS.</Description>
     <PackageDescription>Easily Animate Blazor Components using Blazor Animate. Powered by AOS.</PackageDescription>
     <PackageProjectUrl>https://github.com/mikoskinen/Blazor.Animate</PackageProjectUrl>
-    <Copyright>©2019 Mikael Koskinen</Copyright>
+    <Copyright>©2020 Mikael Koskinen</Copyright>
     <PackageId>BlazorAnimate</PackageId>
     <Product>BlazorAnimate</Product>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/mikoskinen/Blazor.Animate</RepositoryUrl>
     <PackageTags>blazor;animation;animate</PackageTags>
     <Title>Blazor Animate</Title>
-    <MinVerMinimumMajorMinor>2.0</MinVerMinimumMajorMinor>    
+    <MinVerMinimumMajorMinor>3.0</MinVerMinimumMajorMinor>    
   </PropertyGroup>
 
   <ItemGroup>

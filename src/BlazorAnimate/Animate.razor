@@ -1,10 +1,13 @@
 ﻿@using System.Globalization
 @using Microsoft.Extensions.Options
 
-<div @attributes="@InputAttributes" data-aos="@_animationName" data-aos-delay="@_delay" data-aos-duration="@_duration" data-aos-easing="@_easingName"
-     data-aos-mirror="@_mirror" data-aos-once="@_once" data-aos-offset="@Offset" data-aos-anchor="@Anchor" data-aos-anchor-placement="@AnchorPlacement">
-    @ChildContent
-</div>
+@if (_manuallyExecuted || IsManual == false)
+{
+    <div @attributes="@InputAttributes" data-aos="@_animationName" data-aos-delay="@_delay" data-aos-duration="@_duration" data-aos-easing="@_easingName" 
+          data-aos-mirror="@_mirror" data-aos-once="@_once" data-aos-offset="@Offset" data-aos-anchor="@Anchor" data-aos-anchor-placement="@AnchorPlacement">
+        @ChildContent
+    </div>
+}
 
 @code
 {
@@ -14,6 +17,7 @@
     private string _delay = "";
     private string _mirror;
     private string _once;
+    private bool _manuallyExecuted = false;
 
     [Parameter] public RenderFragment ChildContent { get; set; }
     [Parameter] public IAnimation Animation { get; set; }
@@ -29,12 +33,18 @@
     [Parameter] public string AnchorPlacement { get; set; }
     [Parameter] public string OptionsName { get; set; } = Microsoft.Extensions.Options.Options.DefaultName;
     [Parameter] public AnimateOptions Options { get; set; }
+    [Parameter] public bool IsManual { get; set; }
 
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> InputAttributes { get; set; }
 
     [Inject] private IOptionsSnapshot<AnimateOptions> _optionsAccessor { get; set; }
 
+    public void Run()
+    {
+        _manuallyExecuted = true;
+    }
+    
     protected override void OnParametersSet()
     {
         SetDefaults();

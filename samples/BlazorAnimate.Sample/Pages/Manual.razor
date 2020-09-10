@@ -1,0 +1,27 @@
+﻿@page "/manual"
+
+<h1>Manual example</h1>
+
+<p>
+    This sample shows how animation can be executed by clicking a button by setting the IsManual of the Animate component to true and then running the animation using Run-method.
+</p>
+
+<div class="mt-3"></div>
+     
+<button class="btn btn-primary" @onclick="RunAnimation">Animate</button>
+
+<div class="mt-3"></div>
+
+<Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" @ref="myAnim" IsManual="true">
+    <Counter></Counter>
+</Animate>
+
+@code {
+
+    private Animate myAnim;
+
+    private void RunAnimation()
+    {
+        myAnim.Run();
+    }
+}
