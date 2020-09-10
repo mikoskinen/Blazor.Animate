@@ -55,6 +55,34 @@ For a sample, please view http://animateblazorsamplessvc.azurewebsites.net/
 
 The sample's source code is available from GitHub: https://github.com/mikoskinen/Blazor.Animate/tree/master/samples/BlazorAnimate.Sample
 
+## Running animation manually
+
+It's possible to run the event manually. Please note that the animated component will be hidden until the animation is manually executed.
+
+To animate component manually, first set the IsManual to true and also capture the reference to the component:
+
+```
+	<Animate Animation="Animations.ZoomIn" Duration="TimeSpan.FromSeconds(0.5)" @ref="myAnim" IsManual="true">
+		<Counter></Counter>
+	</Animate>
+```
+
+Then in code-behind, call Run-method to animate the component:
+
+```
+	@code {
+
+		private Animate myAnim;
+
+		private void RunAnimation()
+		{
+			myAnim.Run();
+		}
+	}
+```
+
+The Manual.razor page in the sample illustrates this functionality.
+
 ## Animations
 
 To define an animation, use the Animation-property of the Animate-component. The built-in animations are available from BlazorAnimate.Animations:
