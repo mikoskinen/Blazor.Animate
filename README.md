@@ -57,7 +57,7 @@ The sample's source code is available from GitHub: https://github.com/mikoskinen
 
 ## Running animation manually
 
-It's possible to run the event manually. Please note that the animated component will be hidden until the animation is manually executed.
+It's possible to run the animation manually. Please note that the animated component will be hidden until the animation is manually executed.
 
 To animate component manually, first set the IsManual to true and also capture the reference to the component:
 
