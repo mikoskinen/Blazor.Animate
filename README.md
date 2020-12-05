@@ -1,3 +1,7 @@
+# Now part of Blazorise
+
+Starting from the 2020/12/1, Blazor.Animate is now proud to be part of the (Blazorise project)[https://github.com/stsrki/Blazorise]. All the updates and future work for Blazor.Animate will continue through Blazorise.
+
 # Blazor.Animate 
 
 Easily add fade, slide and zoom-effects into your Blazor applications. Blazor.Animate is powered by the excellent [AOS-library](https://michalsnik.github.io/aos/).
