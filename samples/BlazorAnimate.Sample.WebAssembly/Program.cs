@@ -1,16 +1,32 @@
-﻿using Microsoft.AspNetCore.Blazor.Hosting;
+using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorAnimate.Sample.WebAssembly
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            builder.RootComponents.Add<App>("app");
 
-        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
-            BlazorWebAssemblyHost.CreateDefaultBuilder()
-                .UseBlazorStartup<Startup>();
+            builder.Services.Configure<AnimateOptions>("my", options =>
+            {
+                options.Mirror = true;
+                options.Animation = Animations.FadeDown;
+                options.Duration = TimeSpan.FromSeconds(2);
+            });
+
+            builder.Services.Configure<AnimateOptions>(options =>
+            {
+                options.Mirror = true;
+                options.Animation = Animations.FadeDown;
+                options.Duration = TimeSpan.FromMilliseconds(100);
+            });
+
+            await builder.Build().RunAsync();
+        }
     }
 }
